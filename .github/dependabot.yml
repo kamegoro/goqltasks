@@ -9,11 +9,8 @@ updates:
     directory: "/frontend"
     schedule:
       interval: "daily"
-    open-pull-requests-limit: 5
 
   - package-ecosystem: "gomod"
     directory: "/backend"
     schedule:
       interval: "daily"
-    open-pull-requests-limit: 1
-
