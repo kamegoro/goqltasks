@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint --dir src",
     "prettier:check": "prettier src --check \"src/**/*.{js,jsx,ts,tsx}\"",
-    "prettier:format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\""
+    "prettier:format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
+    "codegen": "graphql-codegen --config codegen.yaml"
   },
   "dependencies": {
     "@apollo/client": "3.7.15",
@@ -22,7 +23,11 @@
     "@types/react": "18.2.10",
     "@types/react-dom": "18.2.4",
     "@graphql-codegen/cli": "4.0.1",
+    "@graphql-codegen/core": "^4.0.0",
     "@graphql-codegen/typescript": "4.0.0",
+    "@graphql-codegen/introspection": "4.0.0",
+    "@graphql-codegen/plugin-helpers": "5.0.0",
+    "@graphql-codegen/typescript-react-apollo": "3.3.7",
     "@graphql-codegen/typescript-graphql-request": "5.0.0",
     "@graphql-codegen/typescript-operations": "4.0.0",
     "@graphql-codegen/typescript-resolvers": "4.0.0",
