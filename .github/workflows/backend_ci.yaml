@@ -1,0 +1,64 @@
+name: "Run Backend Lint"
+
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: "read"
+
+jobs:
+  check_any_changed:
+    name: Check-any-changed
+
+    runs-on: ubuntu-latest
+
+    timeout-minutes: 5
+
+    outputs:
+      any_changed: ${{ steps.get_changed_files.outputs.any_changed }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Get Changed Files
+        id: get_changed_files
+        uses: tj-actions/changed-files@v36
+        with:
+          files: |
+            ./.github/workflows/backend_ci.yml
+            ./backend/*
+
+  ci:
+    name: CI
+
+    runs-on: ubuntu-latest
+
+    needs: check_any_changed
+
+    if: needs.check_any_changed.outputs.any_changed == 'true'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: "1.19"
+
+      - name: Actions Static Check
+        uses: reviewdog/action-staticcheck@v1
+        with:
+          github_token: ${{ secrets.github_token }}
+          workdir: "./backend/"
+          reporter: github-pr-review
+          filter_mode: nofilter
+          fail_on_error: true
+
+      - name: Lint
+        uses: Jerome1337/gofmt-action@v1.0.5
+        with:
+          gofmt-path: "./backend"
