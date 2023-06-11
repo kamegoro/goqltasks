@@ -1,6 +1,7 @@
 version: "3"
 services:
   backend:
+    container_name: goqltasks_backend
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -8,8 +9,24 @@ services:
       - "8080:8080"
 
   frontend:
+    container_name: goqltasks_frontend
     build:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
+
+  db:
+    image: mysql:8.0
+    container_name: goqltasks_db
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: saturday
+      MYSQL_USER: saturday
+      MYSQL_PASSWORD: password
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 5s
+      retries: 10
