@@ -28,7 +28,7 @@ jobs:
         uses: tj-actions/changed-files@v36
         with:
           files: |
-            ./.github/workflows/backend_ci.yml
+            ./.github/workflows/backend-ci.yml
             ./backend/*
 
   ci:
