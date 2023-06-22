@@ -12,7 +12,7 @@
     "codegen": "graphql-codegen --config codegen.yaml"
   },
   "dependencies": {
-    "@apollo/client": "3.7.15",
+    "@apollo/client": "3.7.16",
     "graphql": "16.6.0",
     "next": "13.4.6",
     "react": "18.2.0",
