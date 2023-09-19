@@ -32,7 +32,7 @@
     "@graphql-codegen/typescript-graphql-request": "5.0.0",
     "@graphql-codegen/typescript-operations": "4.0.1",
     "@graphql-codegen/typescript-resolvers": "4.0.1",
-    "@typescript-eslint/eslint-plugin": "6.7.0",
+    "@typescript-eslint/eslint-plugin": "6.7.2",
     "eslint": "8.49.0",
     "prettier": "3.0.3",
     "eslint-config-next": "13.4.19",
