@@ -3,7 +3,7 @@ module github.com/kamegoro/goqltasks
 go 1.19
 
 require (
-	github.com/99designs/gqlgen v0.17.37
+	github.com/99designs/gqlgen v0.17.38
 	github.com/vektah/gqlparser/v2 v2.5.10
 )
 
