@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/99designs/gqlgen v0.17.37
-	github.com/vektah/gqlparser/v2 v2.5.9
+	github.com/vektah/gqlparser/v2 v2.5.10
 )
 
 require github.com/google/uuid v1.3.0 // indirect
