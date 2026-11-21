@@ -1,16 +1,15 @@
+/** Internal type. DO NOT USE DIRECTLY. */
+type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+/** Internal type. DO NOT USE DIRECTLY. */
+export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
-export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
 const defaultOptions = {} as const;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: { input: string | number; output: string; }
+  ID: { input: string; output: string; }
   String: { input: string; output: string; }
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
@@ -54,12 +53,12 @@ export type User = {
 export type CreateTodoMutationVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CreateTodoMutation = { __typename?: 'Mutation', createTodo: { __typename?: 'Todo', text: string, done: boolean, user: { __typename?: 'User', id: string } } };
+export type CreateTodoMutation = { createTodo: { text: string, done: boolean, user: { id: string } } };
 
 export type GetTodoQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetTodoQuery = { __typename?: 'Query', todos: Array<{ __typename?: 'Todo', id: string, text: string }> };
+export type GetTodoQuery = { todos: Array<{ id: string, text: string }> };
 
 
 export const CreateTodoDocument = gql`
@@ -130,6 +129,14 @@ export function useGetTodoLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Ge
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetTodoQuery, GetTodoQueryVariables>(GetTodoDocument, options);
         }
+// @ts-ignore
+export function useGetTodoSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetTodoQuery, GetTodoQueryVariables>): Apollo.UseSuspenseQueryResult<GetTodoQuery, GetTodoQueryVariables>;
+export function useGetTodoSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetTodoQuery, GetTodoQueryVariables>): Apollo.UseSuspenseQueryResult<GetTodoQuery | undefined, GetTodoQueryVariables>;
+export function useGetTodoSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetTodoQuery, GetTodoQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetTodoQuery, GetTodoQueryVariables>(GetTodoDocument, options);
+        }
 export type GetTodoQueryHookResult = ReturnType<typeof useGetTodoQuery>;
 export type GetTodoLazyQueryHookResult = ReturnType<typeof useGetTodoLazyQuery>;
+export type GetTodoSuspenseQueryHookResult = ReturnType<typeof useGetTodoSuspenseQuery>;
 export type GetTodoQueryResult = Apollo.QueryResult<GetTodoQuery, GetTodoQueryVariables>;
